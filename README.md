@@ -32,7 +32,7 @@
 ```bash
 pkg update && pkg upgrade
 pkg install python git -y
-pip install requests beautifulsoup4 js2py
+pip install requests beautifulsoup4 rich
 git clone https://github.com/mediafirecom/scraping
-cd web-scraper-html-css-js
-python scraper.py
+cd scraping
+python py.py
