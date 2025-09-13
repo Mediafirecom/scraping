@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Admin Login</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<style>
+:root {
+    --primary: #6200ee;
+    --secondary: #03dac6;
+    --background: #f5f5f5;
+    --error: #b00020;
+    --success: #4caf50;
+    --surface: #ffffff;
+}
+
+* { 
+    box-sizing: border-box; 
+    margin:0; 
+    padding:0; 
+    font-family:'Roboto', sans-serif; 
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    min-height:100vh; 
+    display:flex; 
+    justify-content:center; 
+    align-items:center;
+    background: linear-gradient(135deg, #8e2de2, #4a00e0); 
+    overflow: auto; 
+    flex-direction:column;
+    padding: 20px;
+}
+
+.login-card {
+    background: var(--surface);
+    padding: 40px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+    width: 100%;
+    max-width: 400px; /* Sedikit lebih lebar */
+    text-align: center;
+    position: relative;
+    animation: fadeIn 1s ease;
+}
+
+.login-card h1 {
+    margin-bottom: 24px;
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 2rem; /* Ukuran font lebih besar */
+    letter-spacing: 1px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px; /* Sedikit lebih besar */
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 45px 16px 16px; /* Sedikit lebih besar */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.1rem; /* Font lebih besar */
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 8px rgba(98,0,238,0.3);
+    outline:none;
+}
+
+/* Toggle eye fix */
+.input-group .fa-eye,
+.input-group .fa-eye-slash {
+    position: absolute;
+    right: 16px; /* Sedikit lebih besar */
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #888;
+    transition: color 0.3s ease;
+    z-index: 2;
+    font-size: 1.2rem; /* Ikon lebih besar */
+}
+
+.input-group .fa-eye:hover,
+.input-group .fa-eye-slash:hover { 
+    color: var(--primary); 
+}
+
+button {
+    width: 100%;
+    padding: 16px; /* Sedikit lebih besar */
+    border:none;
+    border-radius: 8px;
+    background-color: var(--primary);
+    color: white;
+    font-size: 1.1rem; /* Font lebih besar */
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+button:active { 
+    transform: scale(0.97); 
+}
+
+button .loading {
+    width: 20px; 
+    height: 20px; 
+    border: 3px solid rgba(255,255,255,0.3);
+    border-top-color: white; 
+    border-radius: 50%; 
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.message {
+    margin-top: 16px;
+    height: 24px;
+    font-weight: 500;
+    font-size: 1rem; /* Font lebih besar */
+    color: var(--error);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.message.show {
+    opacity: 1;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 1rem; /* Font lebih besar */
+    color: rgba(255,255,255,0.9);
+    text-align: center;
+    padding: 0 10px;
+}
+
+@keyframes fadeIn { 
+    from { 
+        opacity:0; 
+        transform: translateY(-20px);
+    } 
+    to { 
+        opacity:1; 
+        transform: translateY(0);
+    } 
+}
+
+@keyframes spin { 
+    to { 
+        transform: rotate(360deg); 
+    } 
+}
+
+/* Floating background animation */
+.bg-bubble {
+    position: fixed; /* Menggunakan fixed agar tidak mengganggu layout */
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    animation: float 6s linear infinite;
+    z-index: -1; /* Di belakang konten */
+}
+
+@keyframes float {
+    0% { 
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+    }
+    50% { 
+        transform: translateY(50vh) scale(1);
+        opacity: 0.5;
+    }
+    100% { 
+        transform: translateY(-20vh) scale(0);
+        opacity: 0;
+    }
+}
+
+/* Media queries untuk perangkat sangat kecil */
+@media (max-width: 360px) {
+    .login-card {
+        padding: 30px 20px;
+    }
+    
+    .login-card h1 {
+        font-size: 1.7rem;
+    }
+    
+    .input-group input {
+        padding: 14px 40px 14px 14px;
+        font-size: 1rem;
+    }
+    
+    button {
+        padding: 14px;
+        font-size: 1rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="login-card">
+    <h1>Admin Login</h1>
+    <div class="input-group">
+        <input type="text" id="username" placeholder="Username">
+    </div>
+    <div class="input-group">
+        <input type="password" id="password" placeholder="Password">
+        <i class="fa fa-eye" id="toggleEye"></i>
+    </div>
+    <button id="loginBtn">Login</button>
+    <div class="message" id="msg"></div>
+</div>
+
+<footer>© 2025 Javas || CBT Matansa</footer>
+
+<!-- Floating bubbles -->
+<div class="bg-bubble" style="width:60px;height:60px;left:10%;animation-delay:0s;"></div>
+<div class="bg-bubble" style="width:40px;height:40px;left:80%;animation-delay:2s;"></div>
+<div class="bg-bubble" style="width:80px;height:80px;left:50%;animation-delay:4s;"></div>
+
+<script>
+const _0x3d463b=_0x5e4c;function _0x2174(){const _0x17acfd=['62579aKlIJP','addEventListener','users','Invalid\x20credentials\x20or\x20not\x20admin','username','json','remove','location','style','click','find','toggleEye','7ExNTpH','Login\x20success!','classList','284445aVOPPZ','2wOyTKO','247275uvqkXh','show','2279464qgaBaP','password','#4caf50','href','textContent','value','fa-eye-slash','loginBtn','role','&password=','1237768dDwBYy','color','36idTSfv','Error\x20fetching\x20users','26755DszoPQ','#b00020','admin','type','<span\x20class=\x22loading\x22></span>','trim','msg','Username\x20&\x20password\x20required','https://raw.githubusercontent.com/Mediafirecom/exambro/main/auth/login/users.json','fa-eye','innerHTML','disabled','1320eIgDUa','getElementById','2278188qLmnem','public/index.html?user=','add'];_0x2174=function(){return _0x17acfd;};return _0x2174();}(function(_0x22f6b6,_0x4bf2ef){const _0x35f617=_0x5e4c,_0x150055=_0x22f6b6();while(!![]){try{const _0x61e158=-parseInt(_0x35f617(0x15f))/0x1*(parseInt(_0x35f617(0x15e))/0x2)+-parseInt(_0x35f617(0x15d))/0x3+-parseInt(_0x35f617(0x139))/0x4+parseInt(_0x35f617(0x13d))/0x5*(parseInt(_0x35f617(0x13b))/0x6)+-parseInt(_0x35f617(0x15a))/0x7*(-parseInt(_0x35f617(0x161))/0x8)+-parseInt(_0x35f617(0x14b))/0x9+-parseInt(_0x35f617(0x149))/0xa*(-parseInt(_0x35f617(0x14e))/0xb);if(_0x61e158===_0x4bf2ef)break;else _0x150055['push'](_0x150055['shift']());}catch(_0x37d82c){_0x150055['push'](_0x150055['shift']());}}}(_0x2174,0x27dfb));const loginBtn=document[_0x3d463b(0x14a)](_0x3d463b(0x136)),msg=document[_0x3d463b(0x14a)](_0x3d463b(0x143)),toggleEye=document[_0x3d463b(0x14a)](_0x3d463b(0x159)),passwordInput=document[_0x3d463b(0x14a)](_0x3d463b(0x162));toggleEye[_0x3d463b(0x14f)]('click',()=>{const _0x971c30=_0x3d463b;passwordInput[_0x971c30(0x140)]===_0x971c30(0x162)?(passwordInput[_0x971c30(0x140)]='text',toggleEye[_0x971c30(0x15c)]['remove'](_0x971c30(0x146)),toggleEye[_0x971c30(0x15c)][_0x971c30(0x14d)](_0x971c30(0x135))):(passwordInput[_0x971c30(0x140)]=_0x971c30(0x162),toggleEye[_0x971c30(0x15c)][_0x971c30(0x154)](_0x971c30(0x135)),toggleEye[_0x971c30(0x15c)]['add'](_0x971c30(0x146)));}),loginBtn['addEventListener'](_0x3d463b(0x157),async()=>{const _0xcfe91=_0x3d463b,_0x51506c=document[_0xcfe91(0x14a)]('username')[_0xcfe91(0x134)]['trim'](),_0x36394b=passwordInput[_0xcfe91(0x134)][_0xcfe91(0x142)]();if(!_0x51506c||!_0x36394b){showMessage(_0xcfe91(0x144));return;}loginBtn['disabled']=!![];const _0x57a90f=loginBtn[_0xcfe91(0x147)];loginBtn[_0xcfe91(0x147)]=_0xcfe91(0x141);try{const _0x236092=await fetch(_0xcfe91(0x145)),_0x42fa93=await _0x236092[_0xcfe91(0x153)](),_0xed4e6=_0x42fa93[_0xcfe91(0x150)][_0xcfe91(0x158)](_0x5d3551=>_0x5d3551[_0xcfe91(0x152)]===_0x51506c&&_0x5d3551[_0xcfe91(0x162)]===_0x36394b&&_0x5d3551[_0xcfe91(0x137)]===_0xcfe91(0x13f));if(_0xed4e6)showMessage(_0xcfe91(0x15b),!![]),setTimeout(()=>window[_0xcfe91(0x155)][_0xcfe91(0x132)]=_0xcfe91(0x14c)+encodeURIComponent(_0x51506c)+_0xcfe91(0x138)+encodeURIComponent(_0x36394b),0x1f4);else showMessage(_0xcfe91(0x151));}catch(_0x203f18){showMessage(_0xcfe91(0x13c)),console['error'](_0x203f18);}finally{loginBtn[_0xcfe91(0x148)]=![],loginBtn[_0xcfe91(0x147)]=_0x57a90f;}});function _0x5e4c(_0x5f061d,_0x551bff){const _0x217424=_0x2174();return _0x5e4c=function(_0x5e4cce,_0x4e4e6f){_0x5e4cce=_0x5e4cce-0x131;let _0x355698=_0x217424[_0x5e4cce];return _0x355698;},_0x5e4c(_0x5f061d,_0x551bff);}function showMessage(_0x3f5704,_0x30bc46=![]){const _0x5633b4=_0x3d463b;msg[_0x5633b4(0x133)]=_0x3f5704,msg[_0x5633b4(0x156)][_0x5633b4(0x13a)]=_0x30bc46?_0x5633b4(0x131):_0x5633b4(0x13e),msg['classList'][_0x5633b4(0x14d)](_0x5633b4(0x160)),setTimeout(()=>msg[_0x5633b4(0x15c)][_0x5633b4(0x154)](_0x5633b4(0x160)),0xbb8);}
+</script>
+</body>
+</html>
